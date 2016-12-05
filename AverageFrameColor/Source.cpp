@@ -26,7 +26,7 @@ int main() {
 		cv::Mat avgColor;
 		cap >> frame;
 		cap >> avgColor;
-		if (!cap.read(frame)) {
+		if (!cap.read(frame) || !cap.read(avgColor)) {
 			break;
 		}
 		cv::subtract(cv::Scalar::all(255), frame, frame);
