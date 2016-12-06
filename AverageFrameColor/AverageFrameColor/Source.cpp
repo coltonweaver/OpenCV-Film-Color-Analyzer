@@ -29,6 +29,7 @@ int main() {
 		if (!cap.read(frame) || !cap.read(avgColor)) {
 			break;
 		}
+		cv::subtract(cv::Scalar::all(255), frame, frame);
 		cv::Scalar c = cv::mean(avgColor);
 		avgColor.setTo(c);
 		cv::resize(avgColor, avgColor, cv::Size::Size_(2048, 2), 0, 0, cv::INTER_CUBIC);
@@ -40,7 +41,7 @@ int main() {
 
 	cv::transpose(saveImage, saveImage);
 
-	cv::imwrite("lavaColorPalette.png", saveImage, compression_params);
+	cv::imwrite("lavaInvertedColorPalette.png", saveImage, compression_params);
 	cap.release();
 	cv::destroyAllWindows();
 
